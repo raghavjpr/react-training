@@ -1,11 +1,9 @@
-import logo from "./logo.svg";
-import "./App.css";
-import Header from "./core/components/Header";
-import Landing from "./core/components/Landing";
-import Footer from "./core/components/Footer";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Login } from "./auth/components/Login";
-import Register from "./auth/components/Register";
+import "./App.css";
+import { AuthRouters } from "./auth/routings/AuthRouters";
+import Footer from "./core/components/layouts/Footer";
+import Header from "./core/components/layouts/Header";
+import Landing from "./core/components/layouts/Landing";
 
 function App() {
   return (
@@ -14,8 +12,7 @@ function App() {
         <Header></Header>
         <Routes>
           <Route path="/" element={<Landing></Landing>}></Route>
-          <Route path="register" element={<Register></Register>}></Route>
-          <Route path="login" element={<Login></Login>}></Route>
+          <Route path="/auth/*" element={<AuthRouters></AuthRouters>}></Route>
         </Routes>
         <Footer></Footer>
       </Router>
