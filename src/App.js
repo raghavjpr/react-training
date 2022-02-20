@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { AuthRouters } from "./auth/routings/AuthRouters";
+import { AuthRouters2 } from "./auth/routings/AuthRouters2";
 import Footer from "./core/components/layouts/Footer";
 import Header from "./core/components/layouts/Header";
 import Landing from "./core/components/layouts/Landing";
@@ -12,7 +12,7 @@ function App() {
         <Header></Header>
         <Routes>
           <Route path="/" element={<Landing></Landing>}></Route>
-          <Route path="/auth/*" element={<AuthRouters></AuthRouters>}></Route>
+          <Route path="/auth/*" element={<AuthRouters2></AuthRouters2>}></Route>
         </Routes>
         <Footer></Footer>
       </Router>
