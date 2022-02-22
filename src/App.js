@@ -1,23 +1,27 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { AuthRouters2 } from "./auth/routings/AuthRouters2";
-import Footer from "./core/components/layouts/Footer";
-import Header from "./core/components/layouts/Header";
-import Landing from "./core/components/layouts/Landing";
-import { Test } from "./propsDemo/Test";
+import { AuthRouters } from "./app/auth/routings/AuthRouters";
+import Footer from "./app/core/components/layouts/Footer";
+import Header from "./app/core/components/layouts/Header";
+import Landing from "./app/core/components/layouts/Landing";
+
+//redux imports
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Header></Header>
-        <Test></Test>
-        <Routes>
-          <Route path="/" element={<Landing></Landing>}></Route>
-          <Route path="/auth/*" element={<AuthRouters2></AuthRouters2>}></Route>
-        </Routes>
-        <Footer></Footer>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <Header></Header>
+          <Routes>
+            <Route path="/" element={<Landing></Landing>}></Route>
+            <Route path="/auth/*" element={<AuthRouters></AuthRouters>}></Route>
+          </Routes>
+          <Footer></Footer>
+        </Router>
+      </Provider>
     </div>
   );
 }

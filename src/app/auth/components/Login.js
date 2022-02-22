@@ -1,10 +1,8 @@
 //function based Component
 import React, { useState } from "react";
-import axios from "axios";
 
 export const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [error, setError] = useState({});
   // const { email, password } = formData;
 
   const onChange = (e) => {
@@ -15,14 +13,6 @@ export const Login = () => {
     e.preventDefault();
     console.log("Hello from Login");
     console.log(JSON.stringify(formData));
-
-    axios
-      .post("/api/users/login", formData)
-      .then((res) => console.log(JSON.stringify(res.data)))
-      .catch((err) => {
-        console.log(JSON.stringify(err.response.data));
-        setError(err.response.data);
-      });
   };
 
   return (
@@ -43,7 +33,6 @@ export const Login = () => {
                   name="email"
                   onChange={onChange}
                 />
-                <div>{error.email}</div>
               </div>
               <div className="form-group">
                 <input
@@ -53,7 +42,6 @@ export const Login = () => {
                   name="password"
                   onChange={onChange}
                 />
-                <div>{error.password}</div>
               </div>
               <input type="submit" className="btn btn-info btn-block mt-4" />
             </form>

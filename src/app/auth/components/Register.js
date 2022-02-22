@@ -1,14 +1,12 @@
-import axios from "axios";
 import React, { useState } from "react";
 
-export const Register2 = () => {
+export const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     password2: "",
   });
-  const [error, setError] = useState({});
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -16,16 +14,8 @@ export const Register2 = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("Hello from Register2");
+    console.log("Hello from Register");
     console.log(JSON.stringify(formData));
-
-    axios
-      .post("/api/users/register", formData)
-      .then((res) => console.log(JSON.stringify(res.data)))
-      .catch((err) => {
-        console.log(JSON.stringify(err.response.data));
-        setError(err.response.data);
-      });
   };
 
   return (
@@ -45,7 +35,6 @@ export const Register2 = () => {
                   onChange={onChange}
                   required
                 />
-                <div>{error.name}</div>
               </div>
               <div className="form-group">
                 <input
@@ -55,7 +44,6 @@ export const Register2 = () => {
                   name="email"
                   onChange={onChange}
                 />
-                <div>{error.email}</div>
                 <small className="form-text text-muted">
                   This site uses Gravatar so if you want a profile image, use a
                   Gravatar email
@@ -69,7 +57,6 @@ export const Register2 = () => {
                   name="password"
                   onChange={onChange}
                 />
-                <div>{error.password}</div>
               </div>
               <div className="form-group">
                 <input
@@ -79,7 +66,6 @@ export const Register2 = () => {
                   name="password2"
                   onChange={onChange}
                 />
-                <div>{error.password2}</div>
               </div>
               <input type="submit" className="btn btn-info btn-block mt-4" />
             </form>
