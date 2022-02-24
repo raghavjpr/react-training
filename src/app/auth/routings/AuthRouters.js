@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Login } from "../components/Login";
-import { Register } from "../components/Register";
+import Login from "../components/Login";
+import Register from "../components/Register";
 
 export const AuthRouters = () => {
-  console.log("Inside the AuthRouters2");
+  console.log("inside the auth Routers");
   return (
     <div>
       <Routes>

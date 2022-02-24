@@ -1,23 +1,35 @@
+import PropTypes from "prop-types";
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { Navigate } from "react-router-dom";
+import { register } from "../action/authAction";
 
-export const Register = () => {
+const Register = ({ isAuthenticated, register }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     password2: "",
   });
-
+  const [error, setError] = useState({});
+  const { name, email, password, password2 } = formData;
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("Hello from Register");
+    console.log("hello from login");
     console.log(JSON.stringify(formData));
-  };
 
+    if (password !== password2) {
+      // we need to inform that passwords are not matched.
+    } else {
+      register({ name, email, password });
+    }
+  };
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard"></Navigate>;
+  }
   return (
     <div className="register">
       <div className="container">
@@ -32,10 +44,11 @@ export const Register = () => {
                   className="form-control form-control-lg"
                   placeholder="Name"
                   name="name"
-                  onChange={onChange}
                   required
+                  onChange={onChange}
                 />
               </div>
+              <div>{error.name}</div>
               <div className="form-group">
                 <input
                   type="email"
@@ -49,6 +62,7 @@ export const Register = () => {
                   Gravatar email
                 </small>
               </div>
+              <div>{error.email}</div>
               <div className="form-group">
                 <input
                   type="password"
@@ -58,6 +72,7 @@ export const Register = () => {
                   onChange={onChange}
                 />
               </div>
+              <div>{error.password}</div>
               <div className="form-group">
                 <input
                   type="password"
@@ -67,6 +82,7 @@ export const Register = () => {
                   onChange={onChange}
                 />
               </div>
+              <div>{error.password2}</div>
               <input type="submit" className="btn btn-info btn-block mt-4" />
             </form>
           </div>
@@ -75,3 +91,14 @@ export const Register = () => {
     </div>
   );
 };
+
+Register.propTypes = {
+  isAuthenticated: PropTypes.bool,
+  register: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { register })(Register);
