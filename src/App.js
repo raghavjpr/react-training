@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { loadUser } from "./app/auth/action/authAction";
 import { AuthRouters } from "./app/auth/routings/AuthRouters";
+import Alert from "./app/core/components/Alert";
 import Footer from "./app/core/components/layouts/Footer";
 import Header from "./app/core/components/layouts/Header";
 import Landing from "./app/core/components/layouts/Landing";
@@ -26,6 +27,7 @@ function App() {
       <Provider store={store}>
         <Router>
           <Header></Header>
+          <Alert />
           <Routes>
             <Route path="/" element={<Landing></Landing>}></Route>
             <Route path="/auth/*" element={<AuthRouters></AuthRouters>}></Route>
