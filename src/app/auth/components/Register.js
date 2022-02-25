@@ -11,7 +11,6 @@ const Register = ({ isAuthenticated, register }) => {
     password: "",
     password2: "",
   });
-  const [error, setError] = useState({});
   const { name, email, password, password2 } = formData;
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -48,7 +47,6 @@ const Register = ({ isAuthenticated, register }) => {
                   onChange={onChange}
                 />
               </div>
-              <div>{error.name}</div>
               <div className="form-group">
                 <input
                   type="email"
@@ -62,7 +60,6 @@ const Register = ({ isAuthenticated, register }) => {
                   Gravatar email
                 </small>
               </div>
-              <div>{error.email}</div>
               <div className="form-group">
                 <input
                   type="password"
@@ -72,7 +69,6 @@ const Register = ({ isAuthenticated, register }) => {
                   onChange={onChange}
                 />
               </div>
-              <div>{error.password}</div>
               <div className="form-group">
                 <input
                   type="password"
@@ -82,7 +78,6 @@ const Register = ({ isAuthenticated, register }) => {
                   onChange={onChange}
                 />
               </div>
-              <div>{error.password2}</div>
               <input type="submit" className="btn btn-info btn-block mt-4" />
             </form>
           </div>

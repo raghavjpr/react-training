@@ -14,6 +14,7 @@ export const register = (formData) => async (dispatch) => {
     // success
     // failure
     dispatch({ type: REGISTER_SUCCESS, payload: res.data });
+    dispatch(setAlert("Success", "success"));
   } catch (err) {
     const errors = err.response.data.errors;
     console.log(JSON.stringify("data is " + JSON.stringify(errors)));

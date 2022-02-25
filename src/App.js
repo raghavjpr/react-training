@@ -9,6 +9,7 @@ import Footer from "./app/core/components/layouts/Footer";
 import Header from "./app/core/components/layouts/Header";
 import Landing from "./app/core/components/layouts/Landing";
 import DashboardRouter from "./app/dashboard/routings/DashboardRouter";
+import { ProfileRouters } from "./app/profile/routing/ProfileRouters";
 import store from "./redux/store";
 import setAuthToken from "./utils/setAuthToken";
 
@@ -34,6 +35,10 @@ function App() {
             <Route
               path="/dashboard/*"
               element={<DashboardRouter></DashboardRouter>}
+            ></Route>
+            <Route
+              path="/profiles/*"
+              element={<ProfileRouters></ProfileRouters>}
             ></Route>
           </Routes>
           <Footer></Footer>
