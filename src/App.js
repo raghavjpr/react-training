@@ -13,13 +13,18 @@ import { ProfileRouters } from "./app/profile/routing/ProfileRouters";
 import store from "./redux/store";
 import setAuthToken from "./utils/setAuthToken";
 
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+  console.log("Testing auth form App.js");
+}
+
 function App() {
   // it should do some fundamental checks for token.
   // useEffect
   useEffect(() => {
     if (localStorage.token) {
-      setAuthToken(localStorage.token);
       store.dispatch(loadUser());
+      console.log("Testing useEffect form App.js");
     }
   }, []);
 

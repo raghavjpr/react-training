@@ -1,4 +1,8 @@
-import { GET_PROFILE, PROFILE_ERROR } from "../../../redux/types/profileTypes";
+import {
+  GET_PROFILE,
+  PROFILE_ERROR,
+  UPDATE_PROFILE,
+} from "../../../redux/types/profileTypes";
 
 const initialState = {
   profile: null,
@@ -12,6 +16,7 @@ export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case GET_PROFILE:
+    case UPDATE_PROFILE:
       return { ...state, profile: payload, loading: false };
 
     case PROFILE_ERROR:

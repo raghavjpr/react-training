@@ -1,9 +1,10 @@
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createProfile } from "../action/profileAction";
 
-export const Profile = ({ profile, createProfile }) => {
+export const Profile = ({ createProfile }) => {
   const [formData, setFormData] = useState({
     status: "",
     company: "",
@@ -18,20 +19,8 @@ export const Profile = ({ profile, createProfile }) => {
     linkedin: "",
     instagram: "",
   });
-  const {
-    status,
-    company,
-    website,
-    location,
-    skills,
-    githubusername,
-    bio,
-    twitter,
-    facebook,
-    youtube,
-    linkedin,
-    instagram,
-  } = formData;
+
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -39,21 +28,7 @@ export const Profile = ({ profile, createProfile }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    createProfile({
-      status,
-      company,
-      website,
-      location,
-      skills,
-      githubusername,
-      bio,
-      twitter,
-      facebook,
-      youtube,
-      linkedin,
-      instagram,
-    });
+    createProfile(formData, navigate);
   };
   return (
     <section className="container">
@@ -65,7 +40,7 @@ export const Profile = ({ profile, createProfile }) => {
       <small>* = required field</small>
       <form className="form" onSubmit={onSubmit}>
         <div className="form-group">
-          <select name="status">
+          <select name="status" onChange={onChange}>
             <option value="0">* Select Professional Status</option>
             <option value="Developer">Developer</option>
             <option value="Junior Developer">Junior Developer</option>
@@ -75,7 +50,6 @@ export const Profile = ({ profile, createProfile }) => {
             <option value="Instructor">Instructor or Teacher</option>
             <option value="Intern">Intern</option>
             <option value="Other">Other</option>
-            onChange={onChange}
           </select>
           <small className="form-text">
             Give us an idea of where you are at in your career
@@ -213,10 +187,12 @@ export const Profile = ({ profile, createProfile }) => {
   );
 };
 
-Profile.propTypes = {};
+Profile.propTypes = {
+  createProfile: PropTypes.func.isRequired,
+};
 
-const mapStateToProps = (state) => ({});
+// const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { createProfile };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(null, mapDispatchToProps)(Profile);

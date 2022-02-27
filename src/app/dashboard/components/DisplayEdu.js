@@ -1,7 +1,34 @@
+import PropTypes from "prop-types";
 import React from "react";
+import Moment from "react-moment";
 import { connect } from "react-redux";
+import { deleteEducation } from "../../profile/action/profileAction";
 
-export const DisplayEdu = (props) => {
+export const DisplayEdu = ({
+  deleteEducation,
+  profile: {
+    profile: { education },
+  },
+}) => {
+  const educations = education.map((ed) => (
+    <tr key={ed._id}>
+      <td>{ed.school}</td>
+      <td className="hide-sm">{ed.degree}</td>
+      <td>
+        <Moment format="YYYY-MM-DD">{ed.from}</Moment>
+        {"  "}
+        {ed.to ? <Moment format="YYYY-MM-DD">{ed.to}</Moment> : "Now"}
+      </td>
+      <td>
+        <button
+          onClick={() => deleteEducation(ed._id)}
+          className="btn btn-danger"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  ));
   return (
     <div>
       <h2 className="my-2">Education Credentials</h2>
@@ -14,25 +41,22 @@ export const DisplayEdu = (props) => {
             <th />
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Northern Essex</td>
-            <td className="hide-sm">Associates</td>
-            <td className="hide-sm">02-03-2007 - 01-02-2009</td>
-            <td>
-              <button className="btn btn-danger">Delete</button>
-            </td>
-          </tr>
-        </tbody>
+        <tbody>{educations}</tbody>
       </table>
     </div>
   );
 };
 
-DisplayEdu.propTypes = {};
+DisplayEdu.propTypes = {
+  education: PropTypes.array.isRequired,
+  deleteEducation: PropTypes.func.isRequired,
+};
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  profile: state.profile,
+  education: state.profile.profile.education,
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { deleteEducation };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DisplayEdu);

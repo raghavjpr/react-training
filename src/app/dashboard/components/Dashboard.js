@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCurrentProfile } from "../../profile/action/profileAction";
 import { DashboardOptions } from "./DashboardOptions";
-import { DisplayEdu } from "./DisplayEdu";
-import { DisplayExp } from "./DisplayExp";
+import DisplayEdu from "./DisplayEdu";
+import DisplayExp from "./DisplayExp";
 
 export const Dashboard = ({
   auth,
@@ -13,6 +13,13 @@ export const Dashboard = ({
   profile: { profile },
 }) => {
   console.log("This is auth from Dashboard" + JSON.stringify(auth));
+
+  useEffect(() => {
+    console.log("Testing from Dashboard useEffect");
+    getCurrentProfile();
+  }, [getCurrentProfile]);
+  console.log("I got the profile" + JSON.stringify(profile));
+
   return (
     <section className="container">
       <h1 className="large text-primary">Dashboard</h1>
